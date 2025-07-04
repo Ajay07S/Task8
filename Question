@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class QuizApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<Question> questions = List.of(
+            new Question("What is the capital of France?", List.of("Berlin", "Madrid", "Paris", "Rome"), 3),
+            new Question("Which language is used for Android development?", List.of("Swift", "Kotlin", "JavaScript", "Python"), 2),
+            new Question("Who wrote 'Macbeth'?", List.of("Shakespeare", "Tolstoy", "Hemingway", "Tagore"), 1),
+            new Question("What is 5 x 6?", List.of("30", "35", "25", "40"), 1)
+        );
+
+        int score = 0;
+
+        for (int i = 0; i < questions.size(); i++) {
+            Question q = questions.get(i);
+            System.out.println("\nQ" + (i + 1) + ". " + q.getQuestion());
+            List<String> opts = q.getOptions();
+            for (int j = 0; j < opts.size(); j++) {
+                System.out.println((j + 1) + ") " + opts.get(j));
+            }
+
+            System.out.print("Your answer (1-4): ");
+            int ans = sc.nextInt();
+
+            if (ans == q.getCorrectOption()) {
+                System.out.println("Correct!");
+                score++;
+            } else {
+                System.out.println("Wrong! Correct answer: " + q.getCorrectOption() + ") " + opts.get(q.getCorrectOption() - 1));
+            }
+        }
+
+        System.out.println("\nYour final score: " + score + "/" + questions.size());
+    }
+}
